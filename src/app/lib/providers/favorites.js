@@ -72,11 +72,10 @@
         if (filters.type !== 'All') {
             matched = [];
             for (var i in sorted) {
-                if (sorted[i].imdb_id.indexOf('mal') !== -1) {
+                if (sorted[i].original_language === 'ja' && sorted[i].genres.includes('animation')) {
                     matched.push(sorted[i]);
                 }
             }
-
             if (filters.type === 'Anime') {
                 sorted = matched;
             } else {
@@ -114,7 +113,7 @@
     var show_fetch_wrapper = async function (imdb_id) {
         let showProvider = App.Config.getProviderForType('tvshow')[0];
         return showProvider.detail(imdb_id, {
-            contextLocale: App.settings.contextLanguage || App.settings.language
+            contextLocale: App.settings.contentLanguage || App.settings.language
         }).then(function (show) {
             show.type = 'show';
             show.country.toLowerCase() === 'jp' ? show.title = show.slug.replace(/-/g, ' ').capitalizeEach() : null;
@@ -191,7 +190,7 @@
             page: filters.page,
             kind: filters.kind
         };
-        if (filters.type === 'Series') {
+        if (filters.type === 'Series' || filters.type === 'Anime') {
             params.type = 'show';
         }
         if (filters.type === 'Movies') {
@@ -209,9 +208,18 @@
     Favorites.prototype.filters = function () {
         const data = {
             kinds: ['Favorites', 'Watched'],
-            types: ['All', 'Movies', 'Series', 'Anime'],
+            types: ['All'],
             sorters: ['watched items', 'year', 'title', 'rating']
         };
+        if (Settings.moviesTabEnable) {
+            data.types.push('Movies');
+        }
+        if (Settings.seriesTabEnable) {
+            data.types.push('Series');
+        }
+        if (Settings.animeTabEnable) {
+            data.types.push('Anime');
+        }
         let filters = {
             kinds: {},
             types: {},

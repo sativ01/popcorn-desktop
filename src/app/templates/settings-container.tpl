@@ -8,7 +8,7 @@
             <span>
                 <i class="far fa-keyboard keyboard tooltipped" data-toggle="tooltip" data-placement="bottom" title="<%= i18n.__("Keyboard Shortcuts") %>"></i>
                 <i class="fa fa-info-circle about tooltipped" data-toggle="tooltip" data-placement="bottom" title="<%= i18n.__("About") %>"></i>
-                <i class="fa fa-question-circle help tooltipped" data-toggle="tooltip" data-placement="bottom" title="<%= i18n.__("Help Section") %>"></i>
+                <i class="fa fa-question-circle help tooltipped" data-toggle="tooltip" data-placement="bottom" title="<%= i18n.__("FAQ") %>"></i>
             </span>
         </div>
     </section>
@@ -87,6 +87,10 @@
                 <input class="settings-checkbox" name="coversShowRating" id="coversShowRating" type="checkbox" <%=(Settings.coversShowRating? "checked='checked'":"")%>>
                 <label class="settings-label" for="coversShowRating"><%= i18n.__("Show rating over covers") %></label>
             </span>
+            <span>
+                <input class="settings-checkbox" name="alwaysShowBookmarks" id="alwaysShowBookmarks" type="checkbox" <%=(Settings.alwaysShowBookmarks? "checked='checked'":"")%>>
+                <label class="settings-label" for="alwaysShowBookmarks"><%= i18n.__("Always show bookmark over covers") %></label>
+            </span>
             <% if (Settings.activateSeedbox) { %>
             <span>
                 <input class="settings-checkbox" name="showSeedboxOnDlInit" id="showSeedboxOnDlInit" type="checkbox" <%=(Settings.showSeedboxOnDlInit? "checked='checked'":"")%>>
@@ -159,7 +163,7 @@
                             var pos_type = {"134": "100%", "154": "113%", "174": "125%", "194": "138%", "214": "150%", "234": "163%", "254": "175%", "274": "188%", "294": "200%"};
                             var pos_sizes = "";
                             for(var key in pos_type) {
-                                pos_sizes += "<option "+(Settings.postersWidth == key? "selected='selected'":"")+" value='"+key+"'>"+i18n.__(pos_type[key])+"</option>";
+                                pos_sizes += "<option "+(Settings.postersWidth == key? "selected='selected'":"")+" value='"+key+"'>"+pos_type[key]+"</option>";
                             }
                         %>
                     <select name="poster_size"><%=pos_sizes%></select>
@@ -168,7 +172,7 @@
             </span>
             <span>
                 <p><%= i18n.__("UI Scaling") %></p>
-                <input id="bigPicture" type="text" size="5" name="bigPicture" value="<%=Settings.bigPicture%>%" autocomplete="off"/>&nbsp;&nbsp;&nbsp;<em><%= i18n.__("25% - 400%") %></em>
+                <input id="bigPicture" type="text" size="5" name="bigPicture" value="<%=Settings.bigPicture%>%" autocomplete="off"/>&nbsp;&nbsp;&nbsp;<em>25% - 400%</em>
             </span>
             <span>
                 <div class="dropdown UITransparency">
@@ -779,11 +783,11 @@
     </section>
 
     <div class="btns">
-        <div class="btn-settings rebuild-bookmarks"><i class="fa fa-rotate-right">&nbsp;&nbsp;</i><%= i18n.__("Rebuild bookmarks database") %></div>
-        <div class="btn-settings flush-bookmarks"><i class="fa fa-trash">&nbsp;&nbsp;</i><%= i18n.__("Flush bookmarks database") %></div>
-        <div class="btn-settings flush-watched"><i class="fa fa-trash">&nbsp;&nbsp;</i><%= i18n.__("Flush watched database") %></div>
-        <div class="btn-settings flush-databases"><i class="fa fa-trash">&nbsp;&nbsp;</i><%= i18n.__("Flush all databases") %></div>
-        <div class="btn-settings default-settings"><i class="fa fa-rotate-right">&nbsp;&nbsp;</i><%= i18n.__("Reset to Default Settings") %></div>
+        <div class="btn-settings rebuild-bookmarks">&nbsp;<i class="fa fa-wrench">&nbsp;&nbsp;&nbsp;</i><%= i18n.__("Rebuild bookmarks database") %>&nbsp;</div>
+        <div class="btn-settings flush-bookmarks">&nbsp;<i class="fa fa-trash">&nbsp;&nbsp;&nbsp;</i><%= i18n.__("Flush bookmarks database") %>&nbsp;</div>
+        <div class="btn-settings flush-watched">&nbsp;<i class="fa fa-trash">&nbsp;&nbsp;&nbsp;</i><%= i18n.__("Flush watched database") %>&nbsp;</div>
+        <div class="btn-settings default-settings">&nbsp;<i class="fa fa-rotate-right">&nbsp;&nbsp;&nbsp;</i><%= i18n.__("Reset to Default Settings") %>&nbsp;</div>
+        <div class="btn-settings flush-databases">&nbsp;<i class="fa fa-rotate-right">&nbsp;&nbsp;&nbsp;</i><%= i18n.__("Reset all") %>&nbsp;&nbsp;</div>
     </div>
 
 </div>
